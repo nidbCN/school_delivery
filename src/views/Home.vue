@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-card>
-        <v-container><item-list/></v-container>
+        <v-container><item-list /></v-container>
       </v-card>
     </v-container>
     <v-container>
@@ -18,8 +18,8 @@ import ItemList from "@/components/ItemList";
 
 export default {
   name: "Home",
-  components:[
+  components: {
     ItemList,
-  ]
-}
+  },
+};
 </script>
