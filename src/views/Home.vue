@@ -6,9 +6,7 @@
       </v-card>
     </v-container>
     <v-container>
-      <v-card>
-        <v-container>TEST2</v-container>
-      </v-card>
+          <v-btn color="primary" block><v-icon small>mdi-send</v-icon>发布新代取</v-btn>
     </v-container>
   </div>
 </template>
