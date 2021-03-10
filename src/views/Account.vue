@@ -14,7 +14,9 @@
                   v-for="(item, i) in settingList"
                   :key="i">
                 <v-list-item-icon>
-                  <v-icon small> {{ item.icon }}</v-icon>
+                  <v-icon small>
+                    {{ item.icon }}
+                  </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   {{ item.content }}
