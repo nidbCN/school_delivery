@@ -71,6 +71,8 @@ export default {
     ],
     select: '用户',
     checkbox: false,
+    myList: null,
+    myLength: null
   }),
   methods: {
     register() {
@@ -79,7 +81,7 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         // 验证成功
-        console.log("TRUE");
+        this.$cookie.set("isLogin", true);
       }
     },
     reset() {

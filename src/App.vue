@@ -5,9 +5,19 @@
         color="primary"
         dark
     >
-      <div class="d-flex align-center">
-        <v-icon>随心赚</v-icon>
-      </div>
+      <router-link to="/">
+        <div class="d-flex align-center">
+          <v-icon>随心赚</v-icon>
+        </div>
+      </router-link>
+
+
+      <v-spacer/>
+      <router-link to="account">
+        <v-icon>mdi-account</v-icon>
+      </router-link>
+
+
     </v-app-bar>
 
     <v-main>

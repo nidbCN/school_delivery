@@ -14,18 +14,33 @@
                   v-for="(item, i) in settingList"
                   :key="i">
                 <v-list-item-icon>
-                  <v-icon small>
-                    {{ item.icon }}
-                  </v-icon>
+                  <v-badge :value="item.hasNew" dot left>
+                    <v-icon small>
+                      {{ item.icon }}
+                    </v-icon>
+                  </v-badge>
                 </v-list-item-icon>
                 <v-list-item-content>
                   {{ item.content }}
                 </v-list-item-content>
+
               </v-list-item>
             </v-list-item-group>
           </v-list>
         </v-card-text>
       </v-card>
+    </v-container>
+    <v-container>
+      <v-btn color="primary" block>
+        <v-icon small>mdi-swap-horizontal</v-icon>
+        切换账号
+      </v-btn>
+    </v-container>
+    <v-container>
+      <v-btn color="error" block>
+        <v-icon small> mdi-logout</v-icon>
+        退出登录
+      </v-btn>
     </v-container>
   </div>
 </template>
@@ -38,24 +53,35 @@ export default {
       {
         icon: "mdi-home",
         content: "收货地址",
+        hasNew: false,
         link: ""
       },
       {
         icon: "mdi-key",
         content: "账号安全",
+        hasNew: false,
         link: ""
       },
       {
         icon: "mdi-message-alert",
         content: "消息通知",
+        hasNew: true,
         link: ""
       },
       {
         icon: "mdi-information-outline",
         content: "关于平台",
+        hasNew: false,
         link: ""
       }
     ]
-  })
+  }),
+  created() {
+    let isLogin = this.$cookie.get("isLogin")
+    if (isLogin === undefined
+        || isLogin !== "true") {
+      this.$router.push({path: "/login"});
+    }
+  }
 }
 </script>
