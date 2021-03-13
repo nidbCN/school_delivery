@@ -2,7 +2,7 @@
   <v-container>
     <v-list two-line>
       <v-list-item-group>
-        <template v-for="(item, index) in items">
+        <template v-for="(item, index) in items.slice(0, limit)">
           <v-list-item :key="item.title">
             <template :v-slot:default="item.time">
               <v-list-item-content>
@@ -10,20 +10,17 @@
 
                 <v-list-item-subtitle
                     class="text--primary"
-                    v-text="item.headline"
+                    v-text="item.time"
                 ></v-list-item-subtitle>
 
                 <v-list-item-subtitle
-                    v-text="item.subtitle"
+                    v-text="item.info"
                 ></v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
-                <v-list-item-action-text v-if="item.time > 0">
-                  剩余： {{ item.time }} min
-                </v-list-item-action-text>
-                <v-list-item-action-text v-else>
-                  <b><span style="color: #ff0000">超时： {{ -item.time }} min</span></b>
+                <v-list-item-action-text>
+                  <b><span style="color: #ff0000">{{ item.action }}</span></b>
                 </v-list-item-action-text>
 
                 <v-icon small> mdi-clock-outline</v-icon>
@@ -39,37 +36,83 @@
 </template>
 
 <script>
+
 export default {
+  props: ['limit'],
   name: "ItemList",
   data: () => ({
     items: [
       {
-        time: 7,
         action: "剩余：7 min",
-        headline: "550011512279140",
-        subtitle: "送件中,赵石（18528371190）",
-        title: "百世快递",
+        time: "2021-3-15",
+        info: "赵石（18528371190）",
+        title: "天天饺子馆",
       },
       {
-        time: 22,
-        action: "剩余：22 min",
-        headline: "773072083648762",
-        subtitle: "取件中,王箐竹（13729100367）",
-        title: "申通快递",
+        action: "已完成",
+        time: "2021-3-13",
+        info: "王刚（13865422515）",
+        title: "万鑫家常菜",
       },
       {
-        time: 6,
-        action: "剩余 6 min",
-        headline: "77128029470899",
-        subtitle: "送件中,牛顺（19927819836）",
-        title: "中通快递",
+        action: "已完成",
+        time: "2021-3-05",
+        info: "李亮（13548756521）",
+        title: "川菜饭庄",
       },
       {
-        time: -2,
-        action: "超时 2 min",
-        headline: "4312742069829",
-        subtitle: "送件中,李刚（12901937829）",
-        title: "韵达快递",
+        action: "已完成",
+        time: "2021-2-27",
+        info: "赵石（13458371190）",
+        title: "撸串吧",
+      },
+      {
+        action: "已完成",
+        time: "2021-2-19",
+        info: "李丽婷（13954251190）",
+        title: "张记西点",
+      },
+      {
+        action: "已完成",
+        time: "2021-2-15",
+        info: "王传（1351251190）",
+        title: "王氏家常菜",
+      },
+      {
+        action: "已完成",
+        time: "2021-2-11",
+        info: "赵石（11735426584）",
+        title: "黄焖鸡米饭",
+      },
+      {
+        action: "已完成",
+        time: "2021-2-11",
+        info: "李刚（13548759521）",
+        title: "天天饺子馆",
+      },
+      {
+        action: "已完成",
+        time: "2021-2-04",
+        info: "王乐乐（15845795235）",
+        title: "快乐星汉堡",
+      },
+      {
+        action: "已完成",
+        time: "2021-1-26",
+        info: "赵石（18528371190）",
+        title: "三姐板面王",
+      },
+      {
+        action: "已完成",
+        time: "2021-1-25",
+        info: "张航（13586478786）",
+        title: "天天饺子馆",
+      },
+      {
+        action: "已完成",
+        time: "2021-2-16",
+        info: "丁伊（13548754652）",
+        title: "中恒鸡排",
       },
     ],
   }),
