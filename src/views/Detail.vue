@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import accountService from "@/comons/accountService";
+
 export default {
   name: "Detail",
   data: () => ({
@@ -28,6 +30,11 @@ export default {
   }),
   methods: {
 
+  },
+  mounted() {
+    if (!accountService.validate()) {
+      this.$router.push({path: "/login"});
+    }
   }
 }
 </script>

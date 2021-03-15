@@ -7,7 +7,7 @@
         </v-container>
       </v-card>
     </v-container>
-    <v-container >
+    <v-container>
       <v-btn v-if="!isShowMore" @click="showMore" color="primary" text>
         <v-icon small>mdi-more</v-icon>
         查看更多历史记录
@@ -24,16 +24,17 @@
       </v-btn>
     </v-container>
     <v-container>
-      <v-btn color="error" block>立即加入我们！</v-btn>
+      <v-btn color="error" @click="joinUs" block>立即加入我们！</v-btn>
     </v-container>
   </div>
 </template>
 
 <script>
 import ItemList from "@/components/ItemList";
+import accountService from "@/comons/accountService";
 
 export default {
-  data:() => ({
+  data: () => ({
     isShowMore: false,
     limit: 5
   }),
@@ -42,6 +43,14 @@ export default {
     ItemList,
   },
   methods: {
+    joinUs() {
+      this.$router.push({
+        name: 'Register',
+        params: {
+          type: 'worker'
+        }
+      });
+    },
     showMore() {
       this.isShowMore = true;
       this.limit = 100;
@@ -51,12 +60,9 @@ export default {
       this.limit = 5;
     }
   },
-  created() {
-    console.log(this.$route.query.isLogin);
-
-    if (this.$route.query.isLogin === undefined
-        || this.$route.query.isLogin !== "true") {
-      this.$router.push({path: "/login"});
+  mounted() {
+    if (!accountService.validate()) {
+      this.$router.push({name: 'Login'});
     }
   }
 };

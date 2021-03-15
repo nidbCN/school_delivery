@@ -2,8 +2,8 @@
   <v-container>
     <v-list two-line>
       <v-list-item-group>
-        <template v-for="(item, index) in items.slice(0, limit)">
-          <v-list-item :key="item.title">
+        <div v-for="(item, index) in items.slice(0, limit)" :key="index">
+          <v-list-item>
             <template :v-slot:default="item.time">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -20,7 +20,7 @@
 
               <v-list-item-action>
                 <v-list-item-action-text>
-                  <b><span style="color: #ff0000">{{ item.action }}</span></b>
+                  <b><span class="red--text">{{ item.action }}</span></b>
                 </v-list-item-action-text>
 
                 <v-icon small> mdi-clock-outline</v-icon>
@@ -28,8 +28,8 @@
             </template>
           </v-list-item>
 
-          <v-divider v-if="index < items.length - 1" :key="index"></v-divider>
-        </template>
+          <v-divider v-if="(index < items.length - 1) && (index < limit - 1)" :key="index"></v-divider>
+        </div>
       </v-list-item-group>
     </v-list>
   </v-container>

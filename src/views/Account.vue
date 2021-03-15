@@ -31,13 +31,13 @@
       </v-card>
     </v-container>
     <v-container>
-      <v-btn color="primary" block>
+      <v-btn @click="logout" color="primary" block>
         <v-icon small>mdi-swap-horizontal</v-icon>
         切换账号
       </v-btn>
     </v-container>
     <v-container>
-      <v-btn color="error" block>
+      <v-btn @click="logout" color="error" block>
         <v-icon small> mdi-logout</v-icon>
         退出登录
       </v-btn>
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import accountService from "@/comons/accountService";
+
 export default {
   name: "Account",
   data: () => ({
@@ -76,11 +78,15 @@ export default {
       }
     ]
   }),
-  created() {
-    let isLogin = this.$cookie.get("isLogin")
-    if (isLogin === undefined
-        || isLogin !== "true") {
-      this.$router.push({path: "/login"});
+  methods: {
+    logout(){
+      accountService.logout();
+      this.$router.push({name:'Login'})
+    }
+  },
+  mounted() {
+    if (!accountService.validate()) {
+      this.$router.push({name:'Login'});
     }
   }
 }

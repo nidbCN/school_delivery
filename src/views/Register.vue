@@ -17,6 +17,11 @@
                 label="密码"
                 required
             ></v-text-field>
+            <v-text-field
+                type="password"
+                label="重复密码"
+                required
+            ></v-text-field>
             <v-select
                 v-model="select"
                 :items="items"
@@ -30,30 +35,23 @@
                 label="同意许可协议"
                 required
             ></v-checkbox>
-
             <v-btn
-                color="primary"
+                color="success"
                 class="mr-4"
-                text
                 @click="register"
             >
               注册
             </v-btn>
             <v-btn
-                color="success"
+                @click="goLogin"
+                color="primary"
                 class="mr-4"
-                @click="validate"
+                text
             >
-              登录
+              <v-icon small> mdi-login</v-icon>
+              已有账户？登录
             </v-btn>
 
-            <v-btn
-                color="error"
-                class="mr-4"
-                @click="reset"
-            >
-              重置
-            </v-btn>
           </v-form>
         </v-container>
       </v-card>
@@ -65,7 +63,7 @@
 import accountService from "@/comons/accountService";
 
 export default {
-  name: "Login",
+  name: "Register",
   data: () => ({
     valid: true,
     items: [
@@ -76,21 +74,19 @@ export default {
     checkbox: false,
   }),
   methods: {
+    goLogin() {
+      this.$router.push({name: 'Login'});
+    },
     register() {
-      this.$router.push({name:'Register'});
-    },
-    validate() {
-      if (this.$refs.form.validate()) {
-        // 验证成功
-        accountService.login();
-        this.$router.push({
-          name: 'Home'
-        });
-      }
-    },
-    reset() {
-      this.$refs.form.reset()
-    },
+      accountService.register();
+      this.$router.push({name: 'Home'});
+    }
   },
+  created() {
+    let type = this.$route.params.type;
+    if (type === "worker") {
+      this.select = '员工';
+    }
+  }
 }
 </script>
